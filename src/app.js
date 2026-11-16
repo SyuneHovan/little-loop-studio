@@ -1151,7 +1151,7 @@
   const themeBtn = $('#theme-toggle');
   function setTheme(t, save) {
     document.documentElement.setAttribute('data-theme', t);
-    $('meta[name=theme-color]').setAttribute('content', t === 'dark' ? '#1C1714' : '#FAF8F5');
+    $('meta[name=theme-color]').setAttribute('content', t === 'dark' ? '#141B23' : '#FAF8F5');
     themeBtn.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
     if (save) { try { localStorage.setItem('ll-theme', t); } catch { } }
   }
