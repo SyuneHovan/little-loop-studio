@@ -60,143 +60,177 @@ const SAMPLE_TOYS = [
     categories: ['animals', 'plants'],
     difficulty: 'medium',
     sizeCm: 18,
-    size: '18 cm (7 in) tall',
-    hook: '2.5 mm (US B/1–C/2)',
+    size: 'about 18 cm (7 in) tall without the cap',
+    hook: '3.5 mm (US E/4)',
     yarn: 'DK',
     time: '8–10 hours',
     colors: [
-      { name: 'Cream', hex: '#F1E9D8' }, { name: 'Sage green', hex: '#8DA47A' },
-      { name: 'Leaf green', hex: '#5C7F4E' }, { name: 'Chestnut brown', hex: '#7E4E2C' }, { name: 'Gold metallic', hex: '#D4A93A' },
+      { name: 'Cream', hex: '#F1E9D8' }, { name: 'Sage green', hex: '#8DA47A' }, { name: 'Brown', hex: '#7E4E2C' },
+      { name: 'Dark green', hex: '#4F7044' }, { name: 'Light green', hex: '#9DBB83' }, { name: 'Light tan', hex: '#CDB08A' },
     ],
-    tags: ['mushroom', 'cottagecore', 'forest', 'bag', 'embroidery', 'lop ears', 'stars', 'leaves'],
-    blurb: 'A cream bunny under a sage-green mushroom cap, with long lop ears covered in embroidered leaf vines, tiny gold stars at the ear tips and a little brown satchel.',
+    tags: ['mushroom', 'cottagecore', 'forest', 'bag', 'embroidery', 'lop ears', 'leaves', 'ruffle'],
+    blurb: 'A cream bunny with a green mushroom cap and a wavy cream ruffle underneath, long ears with leaf embroidery, a little round tail, a forehead leaf and a brown cross-body bag.',
     photos: [
-      { src: '@img/mushroom-bunny-1.jpg', alt: 'Mushroom Bunny amigurumi: a cream crochet bunny with a sage-green mushroom cap, leaf-embroidered lop ears with gold stars, and a brown satchel' },
-      { src: '@img/mushroom-bunny-2.jpg', alt: 'Close-up of the Mushroom Bunny face, showing the cream cap gills and the small brown leaf on the forehead' },
-      { src: '@img/mushroom-bunny-3.jpg', alt: 'Close-up of the body with green leaf embroidery, the brown satchel and the gold stars on the ear tips' },
+      { src: '@img/mushroom-bunny-1.jpg', alt: 'Mushroom Bunny amigurumi: a cream crochet bunny with a sage-green mushroom cap, leaf-embroidered long ears and a brown cross-body bag' },
+      { src: '@img/mushroom-bunny-2.jpg', alt: 'Close-up of the Mushroom Bunny face, showing the cream ruffle under the cap and the small brown leaf on the forehead' },
+      { src: '@img/mushroom-bunny-3.jpg', alt: 'Close-up of the body with green leaf embroidery and the brown bag' },
     ],
     art: { kind: 'bunny', body: '#F3EBD8', ear: '#EFE4CF', cap: '#8FAE7E', spots: '#F7F0E0', leaves: '#5E8A5A', bag: '#8A6243' },
     materials: [
-      'DK cotton yarn in cream, about 70 g',
-      'DK cotton yarn in sage green, about 25 g',
-      'DK cotton yarn in chestnut brown, about 10 g',
-      'Leaf green embroidery floss or fingering yarn',
-      'Gold metallic yarn or thread, a few meters',
-      '2.5 mm crochet hook',
+      'DK cotton yarn in cream (main color), about 100 g',
+      'DK cotton yarn in sage green (cap), about 25 g',
+      'DK cotton yarn in brown (bag and forehead leaf), about 15 g',
+      'Dark green and light green yarn, small amounts for the leaf embroidery',
+      'Light tan yarn, a small amount for the bag embroidery',
+      '3.5 mm crochet hook',
       '10 mm black safety eyes (1 pair)',
-      'Polyester fiberfill stuffing',
-      'Stitch markers, tapestry needle and embroidery needle',
+      'Fiberfill stuffing',
+      'Tapestry needle, stitch marker, pins and scissors',
     ],
     pattern: `## Head
-Cream yarn. Work in continuous rounds and move your marker up each round.
+Cream yarn. Work in a spiral and don't join rounds. Move your stitch marker up every round.
 R1: 6 sc in MR (6)
-R2: inc in each st around (12)
-R3: (sc, inc) x 6 (18)
-R4: (2 sc, inc) x 6 (24)
-R5: (3 sc, inc) x 6 (30)
-R6: (4 sc, inc) x 6 (36)
-R7: (5 sc, inc) x 6 (42)
-R8-15: sc around (42)
-Place the safety eyes between R11 and R12, about 8 stitches apart.
-R16: (5 sc, dec) x 6 (36)
-R17: (4 sc, dec) x 6 (30)
-R18: (3 sc, dec) x 6 (24)
-Start stuffing firmly.
-R19: (2 sc, dec) x 6 (18)
-R20: (sc, dec) x 6 (12)
-R21: dec x 6 (6)
-FO, close the hole and weave in the end.
-## Ears (make 2)
-Cream yarn.
-R1: 6 sc in MR (6)
-R2: (sc, inc) x 3 (9)
-R3: (2 sc, inc) x 3 (12)
-R4: (3 sc, inc) x 3 (15)
-R5-22: sc around (15)
-R23: (3 sc, dec) x 3 (12)
-Do not stuff. Flatten and sc 6 across to close. FO, leaving a long tail for sewing.
-Embroider a leaf vine down each ear: a stem in backstitch with 5–6 lazy daisy leaves in leaf green.
+R2: inc x6 (12)
+R3: (sc, inc) x6 (18)
+R4: (2 sc, inc) x6 (24)
+R5: (3 sc, inc) x6 (30)
+R6: (4 sc, inc) x6 (36)
+R7: (5 sc, inc) x6 (42)
+R8-17: sc around (42)
+Eyes now: put the safety eyes between R12 and R13, 7 stitches apart. Snap the backs on firmly.
+R18: (5 sc, dec) x6 (36)
+R19: (4 sc, dec) x6 (30)
+R20: (3 sc, dec) x6 (24)
+R21: (2 sc, dec) x6 (18)
+Stuff the head firmly.
+R22: (sc, dec) x6 (12)
+R23: dec x6 (6)
+Fasten off, close the hole and weave in the end.
 ## Legs (make 2)
-Cream yarn. The legs are joined to start the body.
+Cream yarn. The body starts at the legs: both legs are joined together, then you crochet the body up from there.
 R1: 6 sc in MR (6)
-R2: inc x 6 (12)
-R3-7: sc around (12)
-FO the first leg. Do not fasten off the second leg.
+R2: inc x6 (12)
+R3: (sc, inc) x6 (18)
+R4: BLO sc around, this makes a flat foot (18)
+R5-8: sc around (18)
+Leg 1: fasten off. Leg 2: don't cut the yarn.
 ## Body
-Cream yarn, continuing from the second leg.
-R1: ch 3, sc 12 around the first leg, sc 3 along the chain, sc 12 around the second leg, sc 3 along the other side of the chain (30)
-R2-8: sc around (30)
-R9: (3 sc, dec) x 6 (24)
-R10-12: sc around (24)
-R13: (2 sc, dec) x 6 (18)
-R14: sc around (18)
-Stuff firmly, adding stuffing to the legs first. FO, leaving a long tail for sewing to the head.
-Embroider two leaf sprigs across the chest before sewing the head on.
+Cream yarn, continuing from leg 2.
+R1: from leg 2, ch 2 and attach to any stitch on leg 1. Sc 18 around leg 1, sc 2 along the chain, sc 18 around leg 2, sc 2 along the other side of the chain (40)
+Put your marker here: this is the new start of the round.
+R2-7: sc around (40)
+R8: (8 sc, dec) x4 (36)
+R9-10: sc around (36)
+R11: (4 sc, dec) x6 (30)
+R12-13: sc around (30)
+R14: (3 sc, dec) x6 (24)
+R15: sc around (24)
+R16: (2 sc, dec) x6 (18)
+Stuff the legs and body firmly. Fasten off and leave a long tail for sewing on the head.
 ## Arms (make 2)
 Cream yarn.
 R1: 6 sc in MR (6)
-R2: (sc, inc) x 3 (9)
-R3-10: sc around (9)
-Stuff the tip lightly. Flatten and sc 4 across to close. FO.
+R2: (sc, inc) x3 (9)
+R3: (2 sc, inc) x3 (12)
+R4-10: sc around (12)
+Stuff only the bottom half lightly.
+R11: flatten the opening and sc 6 through both layers to close it (6)
+Fasten off and leave a tail for sewing.
+## Ears (make 2)
+Cream yarn. The ears start at the bottom tip and are wider at the bottom, like in the photo.
+R1: 6 sc in MR (6)
+R2: (sc, inc) x3 (9)
+R3: (2 sc, inc) x3 (12)
+R4: (3 sc, inc) x3 (15)
+R5-18: sc around (15)
+R19: (3 sc, dec) x3 (12)
+R20-26: sc around (12)
+Don't stuff. Flatten the ear, then sc 6 through both layers to close the top.
+Fasten off and leave a tail for sewing.
+## Tail
+Cream yarn.
+R1: 6 sc in MR (6)
+R2: inc x6 (12)
+R3-4: sc around (12)
+Stuff a little.
+R5: dec x6 (6)
+Fasten off and leave a tail for sewing.
 ## Mushroom cap
-Sage green yarn for the top.
+Green dome, in sage green.
 R1: 6 sc in MR (6)
-R2: inc x 6 (12)
-R3: (sc, inc) x 6 (18)
-R4: (2 sc, inc) x 6 (24)
-R5: (3 sc, inc) x 6 (30)
-R6: (4 sc, inc) x 6 (36)
-R7: (5 sc, inc) x 6 (42)
-R8: (6 sc, inc) x 6 (48)
-R9: (7 sc, inc) x 6 (54)
-R10-14: sc around (54)
-R15: (8 sc, inc) x 6 (60)
-R16: sc around (60)
-Do not FO yet. Set aside while you make the underside.
-## Cap underside
-Cream yarn, worked as a flat circle.
-R1: 6 sc in MR (6)
-R2: inc x 6 (12)
-R3: (sc, inc) x 6 (18)
-R4: (2 sc, inc) x 6 (24)
-R5: (3 sc, inc) x 6 (30)
-R6: (4 sc, inc) x 6 (36)
-R7: (5 sc, inc) x 6 (42)
-R8: (6 sc, inc) x 6 (48)
-R9: (7 sc, inc) x 6 (54)
-R10: (8 sc, inc) x 6 (60)
-Make the gills: with cream yarn, surface slip stitch straight lines from the center out to the edge, about 12 lines evenly spaced.
-Place the underside inside the green cap and sc both edges together with the green yarn. Stuff the cap lightly before closing.
+R2: inc x6 (12)
+R3: (sc, inc) x6 (18)
+R4: (2 sc, inc) x6 (24)
+R5: (3 sc, inc) x6 (30)
+R6: (4 sc, inc) x6 (36)
+R7: (5 sc, inc) x6 (42)
+R8: (6 sc, inc) x6 (48)
+R9: (7 sc, inc) x6 (54)
+R10: (8 sc, inc) x6 (60)
+R11: sc around (60)
+R12: (9 sc, inc) x6 (66)
+R13: sc around (66)
+R14: (10 sc, inc) x6 (72)
+R15-17: sc around (72)
+Cream underside: change to cream.
+R18: BLO sc around, this makes a neat folded edge (72)
+R19: (10 sc, dec) x6 (66)
+R20: (9 sc, dec) x6 (60)
+R21: (8 sc, dec) x6 (54)
+R22: (7 sc, dec) x6 (48)
+R23: (6 sc, dec) x6 (42)
+Fasten off and leave a long tail. The hole in the middle is where the head goes.
+## Wavy ruffle
+Cream yarn, a separate piece worked in rows.
+Row 1: ch 73. Sc in the 2nd ch from the hook and in each ch across (72)
+Row 2: ch 2 (doesn't count as a stitch), 2 hdc in each stitch across (144)
+Fasten off. Sew the two short ends together to make a ring.
+Sew the straight edge (row 1) around the cap underside on R19, so that the wavy edge peeks out just below the green rim.
 ## Forehead leaf
-Chestnut brown yarn, worked in a row.
-Row 1: ch 7, sl st in 2nd ch from hook, sc, hdc, dc, hdc, sc (6)
-Work sc down the other side of the chain and sl st to the tip. Embroider a center vein in gold or light brown.
-## Stars (make 2)
-Gold metallic yarn.
-R1: 5 sc in MR (5)
-R2: (ch 3, sl st in 2nd ch from hook, sc in next ch, sl st in next MR st) x 5 (5)
-FO, leaving a tail to sew to the ear tip.
-## Satchel
-Chestnut brown yarn, worked in rows.
-Row 1: ch 11, sc in 2nd ch from hook and across (10)
-Row 2-14: ch 1, turn, sc across (10)
-Fold rows 1–5 up to form the pocket and sl st up both sides. Round off the flap corners with a row of sc.
-Strap: ch 70 and sl st to the other side of the bag.
-Embroider a leaf on the flap and a small gold clasp below it.`,
+Brown yarn.
+Row 1: ch 6. Starting in the 2nd ch from the hook: sl st, sc, hdc, dc. In the last ch: hdc, ch 2, sl st in the 2nd ch from the hook for the pointy tip, hdc. Along the other side of the chain: dc, hdc, sc, sl st.
+Fasten off. Stitch a vein down the middle with dark brown or tan yarn.
+## Bag pouch
+Brown yarn.
+R1: ch 9. Sc in the 2nd ch from the hook, sc 6, 3 sc in the last ch. Turn and work along the other side of the chain: sc 6, 2 sc in the first ch (18)
+R2-7: sc around (18)
+Fasten off. Don't stuff. Flatten it into a little pouch.
+## Bag flap and strap
+Brown yarn.
+Row 1: ch 8. Sc in the 2nd ch from the hook and across (7)
+Row 2-5: ch 1, turn, sc across (7)
+Row 6: ch 1, turn, dec, 3 sc, dec (5)
+Row 7: ch 1, turn, dec, sc, dec (3)
+Sc around the whole flap edge for a neat finish. Fasten off.
+Sew the straight top of the flap to the back top edge of the pouch, then fold it over the front.
+Strap: ch about 60, then sl st into the back bump of each chain back down. Sew one end to each side of the pouch.
+Embroidery: with light tan yarn, stitch a few leaf-vein lines on the flap and a small sprout shape on the front of the pouch.
+## Leaf embroidery
+Use dark green for the stems and leaves and light green for the leaf centers. Split the yarn into 2 thinner strands if it looks too bulky.
+Stems: back stitch or stem stitch in a gentle curve.
+Leaves: a lazy daisy stitch, or 3 to 4 satin stitches side by side in a leaf shape. Add one light green straight stitch in the middle as a vein.
+Ears (before sewing them on): one vine down the front of each ear, with 5 leaves alternating left and right.
+Body (before attaching the arms and bag): one vine from one shoulder down across the belly to the opposite hip, with about 8 leaves. Run it the opposite way to the bag strap so that both show.`,
     assembly: [
-      'Sew the head to the body, adding a little extra stuffing in the neck before closing.',
-      'Sew the ears to the sides of the head just under where the cap will sit, so they hang straight down past the arms.',
-      'Sew the arms on each side of the body, 2 rounds below the neck.',
-      'Sew the mushroom cap onto the top of the head so it sits level and covers the ear seams.',
-      'Sew the brown leaf to the forehead, just under the cap edge, between the eyes.',
-      'Sew a gold star to the tip of each ear.',
-      'Put the satchel strap across the body from the left shoulder and tack it in place under the right arm.',
+      'Embroider the leaf vines on both ears and the body first. This is much easier while the pieces are loose.',
+      'Head to body: pin the head onto the open neck of the body (R16). Make sure the eyes face forward, then sew all the way around. Add a little more stuffing in the neck before closing it up, so the head doesn\'t wobble.',
+      'Ears: sew the flat top of each ear to the side of the head at R9–R10, right where the cap rim will cover the seam. Let them hang down beside the body.',
+      'Cap: pull the cap over the top of the head so it covers down to about R8–R9 and the ear tops. Push a little stuffing into the brim so it stays puffy. Pin it level, then sew around the cream opening.',
+      'Forehead leaf: sew it in the center of the forehead, just below the ruffle and above the eyes, pointing up.',
+      'Arms: sew them to the sides of the body at R14–R15, angled slightly forward.',
+      'Tail: sew it to the center back at about body R4–R5.',
+      'Bag: place the strap over one shoulder so the bag rests on the opposite hip. Add a stitch at the shoulder so it stays in place.',
     ],
     tricky: [
-      { q: 'Joining the legs', a: 'Make sure both legs face forward before you make the ch 3 join. Count your 30 stitches on round 1 and place a marker before you continue.' },
-      { q: 'Embroidered leaf vines', a: 'Embroider the ears and chest before assembly, while the pieces are easy to hold. Keep your stitches loose so the fabric doesn\'t pucker.' },
-      { q: 'Cap gills', a: 'Keep your surface slip stitches loose and the lines straight, working from the center out. Pin the underside to the cap before joining so the edges stay even.' },
-      { q: 'Tiny gold stars', a: 'Metallic yarn frays easily. Put a small drop of fabric glue on the cut ends, and pull the magic ring tight before working the points.' },
+      { q: 'Magic ring', a: 'Wrap the yarn around 2 fingers, insert the hook, pull up a loop, ch 1, then work the sc into the ring. Pull the tail to close it tight.' },
+      { q: 'Invisible decrease', a: 'Insert the hook into the front loop of the next stitch and the front loop of the one after it (3 loops on the hook), yarn over and pull through 2 loops, then yarn over and pull through both. It\'s much neater than a normal sc2tog.' },
+      { q: 'Joining the legs', a: 'Count your stitches carefully. You should have exactly 40 after body R1. If there\'s a small hole between the legs, close it with your yarn tail.' },
+      { q: 'BLO rounds (foot sole, cap edge)', a: 'Only crochet into the back loop. The unused front loops make a ridge, and that ridge is what gives the sharp edge.' },
+      { q: 'Safety eyes', a: 'Always put them in before you close the head. Check where they sit from the front before snapping on the backs, because they\'re very hard to remove afterwards.' },
+      { q: 'Lining up the cap', a: 'Use 4 pins at the front, back and both sides first, then sew. That keeps the cap from sitting crooked.' },
+      { q: 'Lazy daisy leaf', a: 'Come up at the base of the leaf, go back down into the same hole and leave a loop. Come up at the leaf tip inside the loop, then go down just outside it to hold the loop in place.' },
+      { q: 'Color change', a: 'On the last stitch before the new color, pull the new color through the final 2 loops.' },
+      { q: 'Hook size', a: '3.5 mm is a little big for amigurumi with DK yarn. Crochet tightly so the stuffing doesn\'t show. If you still see gaps, go down to a 3 mm hook.' },
     ],
   },
   {

@@ -404,20 +404,17 @@
       <div class="container about">
         <div class="about-photo"><img src="${t ? t.pics[0].src : ''}" alt="${t ? esc(t.pics[0].alt) : ''}" width="360" height="360"></div>
         <div>
-          <span class="placeholder-note">Placeholder text: replace with your own story</span>
-          <h1 style="margin-top:12px">Hi, I'm [Your name]</h1>
-          <p class="lead" style="font-size:1.15rem;color:var(--text-soft)">I crochet small, soft friends from my kitchen table, usually with a cup of tea going cold beside me.</p>
-          <p>I started making amigurumi in [year] and have been writing my own patterns ever since. I love forest animals, mushrooms, and anything with tiny embroidered details.</p>
-          <p>Every pattern here is tested and written round by round, in US crochet terms, so you can follow along on your phone without losing your place.</p>
-          ${divider.replace('class="divider"', 'class="divider" style="margin:20px 0"')}
-          <h2>Using my patterns</h2>
+          <h1>Hi, I'm Syune</h1>
+          <p class="lead" style="font-size:1.1rem;color:var(--text-soft)">I crochet small, soft friends and write down every pattern, round by round, so you can make them too.</p>
+          <p>My favorites are forest creatures, mushrooms and tiny embroidered details. Every pattern here uses US crochet terms and is written to be easy to follow on your phone, with a checkbox for every round so you never lose your place.</p>
+          <h2 style="margin-top:28px">Using my patterns</h2>
           <ul>
             <li>Patterns are for personal use. You're welcome to sell finished toys in small batches. Please credit ${esc(SITE.name)}.</li>
             <li>Please don't share or resell the written patterns themselves.</li>
-            <li>Tag your makes with <strong>#littleloopstudio</strong>. I love seeing them!</li>
+            <li>I'd love to see what you make! Tag me on Instagram.</li>
           </ul>
-          <h2>Say hello</h2>
-          <p>Email: <strong>hello@example.com</strong> <span class="placeholder-note">placeholder</span><br>Instagram: <strong>@yourhandle</strong> <span class="placeholder-note">placeholder</span></p>
+          <h2 style="margin-top:28px">Say hello</h2>
+          <p>Instagram: <a href="https://www.instagram.com/myrkvidr.refr/">@myrkvidr.refr</a><br>Email: <a href="mailto:syunehovhan@gmail.com">syunehovhan@gmail.com</a></p>
         </div>
       </div>`,
     };
@@ -449,7 +446,8 @@
     const rx = 262, ry = 182, nw = 160, nh = 58;
     const colorOf = p => {
       const txt = p.items.filter(i => i.type === 'note').map(i => i.text.toLowerCase()).join(' ');
-      return (t.colors.find(c => txt.includes(c.name.toLowerCase())) || t.colors[0] || { hex: '#E9D8BC' }).hex;
+      const hit = t.colors.map(c => ({ c, i: txt.indexOf(c.name.toLowerCase()) })).filter(x => x.i >= 0).sort((a, z) => a.i - z.i)[0];
+      return (hit ? hit.c : t.colors[0] || { hex: '#E9D8BC' }).hex;
     };
     const narrow = window.innerWidth < 640;
     let W = 720, H = 500, cx = W / 2, cy = H / 2;
@@ -465,7 +463,7 @@
           <rect width="${nw}" height="${nh}" rx="18" fill="#FFFFFF" stroke="#EAE4DB" stroke-width="1.5"/>
           <circle cx="20" cy="${nh / 2}" r="7" fill="${colorOf(p)}" stroke="rgba(63,46,36,.2)" stroke-width="1"/>
           <text x="36" y="25" font-family="Nunito, sans-serif" font-weight="800" font-size="15" fill="#3F2E24">${esc(name)}</text>
-          <text x="36" y="43" font-family="Inter, sans-serif" font-size="12" fill="#75655A">${r.length} ${r.length === 1 ? unit.slice(0, -1) : unit}${p.count > 1 ? ` · make ${p.count}` : ''}</text>
+          <text x="36" y="43" font-family="Inter, sans-serif" font-size="12" fill="#75655A">${r.length ? `${r.length} ${r.length === 1 ? unit.slice(0, -1) : unit}` : 'how-to'}${p.count > 1 ? ` · make ${p.count}` : ''}</text>
         </g>`];
     });
     const nodesSvg = nodes.map(x => x[0]).join('') + nodes.map(x => x[1]).join('');
@@ -738,7 +736,7 @@
           t.parts.forEach((p, pi) => {
             const bs = boxes.filter(b => +b.dataset.part === pi), d = bs.filter(b => b.checked).length;
             const meta = $(`[data-pmeta="${pi}"]`, root), side = $(`[data-side="${pi}"]`, root);
-            const txt = d === bs.length && bs.length ? 'Done' : `${d}/${bs.length}`;
+            const txt = !bs.length ? '' : d === bs.length ? 'Done' : `${d}/${bs.length}`;
             meta.textContent = txt; meta.classList.toggle('done', d === bs.length && bs.length > 0);
             side.textContent = txt; side.classList.toggle('ok', d === bs.length && bs.length > 0);
             bs.forEach(b => b.closest('.round').classList.remove('next'));
