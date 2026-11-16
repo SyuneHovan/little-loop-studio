@@ -458,12 +458,12 @@
       const r = p.items.filter(i => i.type === 'round');
       const unit = r.some(x => x.label.startsWith('Row')) ? 'rows' : 'rounds';
       const name = p.name.length > 16 ? p.name.slice(0, 15) + '…' : p.name;
-      return [narrow ? '' : `<path d="M${cx} ${cy} Q${(cx + x) / 2 + (y - cy) * .12} ${(cy + y) / 2 - (x - cx) * .12} ${x} ${y}" stroke="#DCD3C7" stroke-width="1.5" fill="none"/>`,
+      return [narrow ? '' : `<path d="M${cx} ${cy} Q${(cx + x) / 2 + (y - cy) * .12} ${(cy + y) / 2 - (x - cx) * .12} ${x} ${y}" style="stroke:var(--hover-line)" stroke-width="1.5" fill="none"/>`,
         `<g transform="translate(${x - nw / 2} ${y - nh / 2})">
-          <rect width="${nw}" height="${nh}" rx="18" fill="#FFFFFF" stroke="#EAE4DB" stroke-width="1.5"/>
+          <rect width="${nw}" height="${nh}" rx="18" style="fill:var(--surface);stroke:var(--line)" stroke-width="1.5"/>
           <circle cx="20" cy="${nh / 2}" r="7" fill="${colorOf(p)}" stroke="rgba(63,46,36,.2)" stroke-width="1"/>
-          <text x="36" y="25" font-family="Nunito, sans-serif" font-weight="800" font-size="15" fill="#3F2E24">${esc(name)}</text>
-          <text x="36" y="43" font-family="Inter, sans-serif" font-size="12" fill="#75655A">${r.length ? `${r.length} ${r.length === 1 ? unit.slice(0, -1) : unit}` : 'how-to'}${p.count > 1 ? ` · make ${p.count}` : ''}</text>
+          <text x="36" y="25" font-family="Nunito, sans-serif" font-weight="800" font-size="15" style="fill:var(--text)">${esc(name)}</text>
+          <text x="36" y="43" font-family="Inter, sans-serif" font-size="12" style="fill:var(--text-soft)">${r.length ? `${r.length} ${r.length === 1 ? unit.slice(0, -1) : unit}` : 'how-to'}${p.count > 1 ? ` · make ${p.count}` : ''}</text>
         </g>`];
     });
     const nodesSvg = nodes.map(x => x[0]).join('') + nodes.map(x => x[1]).join('');
@@ -471,10 +471,10 @@
     return `<svg class="mindmap" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}">
       <defs><clipPath id="mm-clip"><circle cx="${cx}" cy="${cy - 8}" r="62"/></clipPath></defs>
       ${nodesSvg}
-      <circle cx="${cx}" cy="${cy - 8}" r="66" fill="#F3EFE9"/>
+      <circle cx="${cx}" cy="${cy - 8}" r="66" style="fill:var(--muted-bg)"/>
       <image href="${t.pics[0].src}" x="${cx - 62}" y="${cy - 70}" width="124" height="124" clip-path="url(#mm-clip)" preserveAspectRatio="xMidYMid slice"/>
-      <rect x="${cx - 80}" y="${cy + 52}" width="160" height="32" rx="16" fill="#3F2E24"/>
-      <text x="${cx}" y="${cy + 73}" text-anchor="middle" font-family="Nunito, sans-serif" font-weight="800" font-size="14" fill="#fff">${esc(t.name.length > 20 ? t.name.slice(0, 19) + '…' : t.name)}</text>
+      <rect x="${cx - 80}" y="${cy + 52}" width="160" height="32" rx="16" style="fill:var(--text)"/>
+      <text x="${cx}" y="${cy + 73}" text-anchor="middle" font-family="Nunito, sans-serif" font-weight="800" font-size="14" style="fill:var(--on-ink)">${esc(t.name.length > 20 ? t.name.slice(0, 19) + '…' : t.name)}</text>
     </svg>`;
   }
 
@@ -1146,6 +1146,23 @@
   const toTop = $('#to-top'), header = $('.site-header');
   window.addEventListener('scroll', () => { toTop.classList.toggle('show', window.scrollY > 700); header.classList.toggle('scrolled', window.scrollY > 4); }, { passive: true });
   toTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: reduced() ? 'auto' : 'smooth' }); app.focus({ preventScroll: true }); });
+
+  /* ---------------- theme ---------------- */
+  const themeBtn = $('#theme-toggle');
+  function setTheme(t, save) {
+    document.documentElement.setAttribute('data-theme', t);
+    $('meta[name=theme-color]').setAttribute('content', t === 'dark' ? '#1C1714' : '#FAF8F5');
+    themeBtn.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    if (save) { try { localStorage.setItem('ll-theme', t); } catch { } }
+  }
+  setTheme(document.documentElement.getAttribute('data-theme') || 'light', false);
+  themeBtn.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    if (document.startViewTransition && !reduced()) document.startViewTransition(() => setTheme(next, true)); else setTheme(next, true);
+  });
+  try {
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => { if (!localStorage.getItem('ll-theme')) setTheme(e.matches ? 'dark' : 'light', false); });
+  } catch { }
 
   /* ---------------- start ---------------- */
   document.documentElement.classList.remove('no-js');
