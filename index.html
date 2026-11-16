@@ -481,6 +481,25 @@ button { cursor: pointer; }
   a { color: inherit; text-decoration: none; }
 }
 
+/* make it your size */
+.sizer { margin-top: 24px; padding: 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.sizer-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.sizer-head h2 { font-size: 1.1rem; margin: 0; }
+.sizer-head .btn-link { min-height: 36px; padding: 4px; }
+.sizer-head .btn-link[hidden] { display: none; }
+.sizer-label { font-size: .8rem; color: var(--text-soft); margin: 14px 0 8px; }
+.opts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.opts.hooks { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
+.opt { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; padding: 9px 12px; min-height: 52px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); text-align: left; transition: border-color .2s, background .2s, color .2s; }
+.opt:hover { border-color: #D9D0C3; }
+.opt strong { font-weight: 600; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.opt span { font-size: .78rem; color: var(--text-soft); line-height: 1.3; }
+.opt[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: #fff; }
+.opt[aria-pressed="true"] span { color: rgba(255,255,255,.75); }
+.sizer-note { margin: 14px 0 0; font-size: .88rem; color: var(--text-soft); }
+.sizer-note strong { color: var(--text); }
+@media print { .sizer .opts, .sizer-label, .sizer-head .btn-link { display: none !important; } .sizer { border: 0; padding: 0; } }
+
 </style>
 </head>
 <body>
@@ -1837,6 +1856,53 @@ const Art = (() => {
     })).sort((a, b) => b.s - a.s).slice(0, 4).map(x => x.o);
   }
 
+  /* ---------------- make it your size ----------------
+     In amigurumi the stitch counts stay the same; the finished size
+     comes from the yarn weight and hook. We estimate it from typical
+     amigurumi gauge (tight single crochet). */
+  const SCALE = {
+    'Fingering':   { st: 3.3,  hooks: [2.0, 2.25, 2.5] },
+    'Sport':       { st: 3.85, hooks: [2.5, 2.75, 3.0] },
+    'DK':          { st: 4.5,  hooks: [2.75, 3.0, 3.5] },
+    'Worsted':     { st: 5.6,  hooks: [3.5, 3.75, 4.0] },
+    'Chunky':      { st: 7.7,  hooks: [5.0, 5.5, 6.0] },
+    'Super bulky': { st: 12.5, hooks: [8.0, 9.0, 10.0] },
+  };
+  const US_HOOK = { 2.25: 'B/1', 2.75: 'C/2', 3.25: 'D/3', 3.5: 'E/4', 3.75: 'F/5', 4.0: 'G/6', 4.5: '7', 5.0: 'H/8', 5.5: 'I/9', 6.0: 'J/10', 6.5: 'K/10.5', 8.0: 'L/11', 9.0: 'M/N-13', 10.0: 'N/P-15' };
+  const EYE_SIZES = [4.5, 6, 8, 9, 10, 12, 15, 18, 20, 25, 30];
+  const hookMm = s => { const m = String(s || '').match(/(\d+(?:\.\d+)?)\s*mm/); return m ? +m[1] : null; };
+  const fmtHook = mm => `${mm.toFixed(mm % 0.5 ? 2 : 1)} mm${US_HOOK[mm] ? ` (US ${US_HOOK[mm]})` : ''}`;
+  const midHook = y => SCALE[y].hooks[1];
+  const stitchSize = (yarn, hook) => SCALE[yarn].st * (1 + 0.1 * (hook - midHook(yarn)));
+  function makeBase(t) {
+    const yarn = SCALE[t.yarn] ? t.yarn : 'DK';
+    return { yarn, hook: hookMm(t.hook) || midHook(yarn) };
+  }
+  const hooksFor = (t, yarn) => {
+    const b = makeBase(t);
+    return [...new Set([...SCALE[yarn].hooks, ...(yarn === b.yarn ? [b.hook] : [])])].sort((a, z) => a - z);
+  };
+  function makeInfo(t, cfg) {
+    const b = makeBase(t);
+    const f = stitchSize(cfg.yarn, cfg.hook) / stitchSize(b.yarn, b.hook);
+    const cm = Math.round((+t.sizeCm || 10) * f * 2) / 2;
+    return { f, cm, inch: Math.round(cm / 2.54 * 10) / 10, original: cfg.yarn === b.yarn && cfg.hook === b.hook };
+  }
+  const snapEye = mm => EYE_SIZES.reduce((a, z) => Math.abs(z - mm) < Math.abs(a - mm) ? z : a);
+  function scaleMaterial(line, cfg, info) {
+    if (info.original) return line;
+    let out = line;
+    const g = out.match(/about (\d+(?:\.\d+)?) g\b/);
+    if (!/floss|thread|embroider/i.test(out)) {
+      if (g) out = out.replace(g[0], `about ${Math.max(5, Math.round(+g[1] * Math.pow(info.f, 3) / 5) * 5)} g`);
+      out = out.replace(/\b(fingering|sport|dk|worsted|chunky|super bulky)\b(\s+or\s+(fingering|sport|dk|worsted|chunky))?/i, cfg.yarn);
+    }
+    out = out.replace(/(\d+(?:\.\d+)?)\s*mm crochet hook/i, `${fmtHook(cfg.hook)} crochet hook`);
+    out = out.replace(/(\d+(?:\.\d+)?)\s*mm (black )?safety eyes/i, (m, mm, black) => `${snapEye(+mm * info.f)} mm ${black || ''}safety eyes`);
+    if (/stuffing/i.test(out) && !/\d+\s*g\b/.test(out)) out += `, about ${Math.max(5, Math.round(0.0045 * Math.pow(info.cm, 3) / 5) * 5)} g`;
+    return out;
+  }
+
   function viewToy(id) {
     const t = byId(id);
     if (!t) return viewNotFound();
@@ -1871,14 +1937,22 @@ const Art = (() => {
           </div>
           <section class="facts" aria-label="Quick facts">
             <dl>
-              ${fact('Finished size', esc(t.size || t.sizeCm + ' cm'))}
+              ${fact('Finished size', `<span data-out="size">${esc(t.size || t.sizeCm + ' cm')}</span>`)}
               ${fact('Difficulty', cap(esc(t.difficulty)))}
-              ${fact('Hook', esc(t.hook))}
-              ${fact('Yarn weight', esc(t.yarn))}
+              ${fact('Hook', `<span data-out="hook">${esc(t.hook)}</span>`)}
+              ${fact('Yarn weight', `<span data-out="yarn">${esc(t.yarn)}</span>`)}
               ${fact('Time', esc(t.time))}
               ${fact('Rounds', `${total}`)}
               ${fact('Colors', `<span class="color-list">${t.colors.map(c => `<span><i class="dot-c" style="background:${esc(c.hex)}"></i>${esc(c.name)}</span>`).join('')}</span>`, true)}
             </dl>
+          </section>
+          <section class="sizer" aria-labelledby="sizer-h">
+            <div class="sizer-head"><h2 id="sizer-h">Make it your size</h2><button type="button" class="btn-link" data-size-reset hidden>Use original</button></div>
+            <p class="sizer-label" id="yarn-l">Toy size, by yarn weight</p>
+            <div class="opts" role="group" aria-labelledby="yarn-l" id="yarn-opts"></div>
+            <p class="sizer-label" id="hook-l">Hook size</p>
+            <div class="opts hooks" role="group" aria-labelledby="hook-l" id="hook-opts"></div>
+            <p class="sizer-note" id="sizer-note" aria-live="polite"></p>
           </section>
           ${t.tags.length ? `<p class="tag-line">${t.tags.map(g => `<a href="#browse" data-tag="${esc(g)}">#${esc(g)}</a>`).join('&ensp;')}</p>` : ''}
         </div>
@@ -1888,7 +1962,7 @@ const Art = (() => {
         <div>
           <section class="sec" style="padding-top:0" aria-labelledby="mat-h">
             <h2 id="mat-h">Materials</h2>
-            <ul class="checklist">${t.materials.map((m, i) => `<li><label class="check"><input type="checkbox" data-mat="${i}"><span class="box">${I.check}</span><span class="txt">${esc(m)}</span></label></li>`).join('')}</ul>
+            <ul class="checklist" id="mat-list"></ul>
           </section>
 
           <section class="sec" aria-labelledby="map-h">
@@ -1972,12 +2046,44 @@ const Art = (() => {
         // materials
         const matKey = `ll-mat-${t.id}`;
         let mats = new Set(store.get(matKey, []));
-        const matMeta = () => { };
-        $$('[data-mat]', root).forEach(c => {
-          c.checked = mats.has(+c.dataset.mat);
-          c.addEventListener('change', () => { c.checked ? mats.add(+c.dataset.mat) : mats.delete(+c.dataset.mat); store.set(matKey, [...mats]); matMeta(); });
+        const matList = $('#mat-list', root);
+        matList.addEventListener('change', e => {
+          const c = e.target.closest('[data-mat]'); if (!c) return;
+          c.checked ? mats.add(+c.dataset.mat) : mats.delete(+c.dataset.mat); store.set(matKey, [...mats]);
         });
-        matMeta();
+        // size & hook
+        const base = makeBase(t), cfgKey = `ll-make-${t.id}`;
+        let cfg = { ...base, ...store.get(cfgKey, {}) };
+        if (!SCALE[cfg.yarn] || !hooksFor(t, cfg.yarn).includes(cfg.hook)) cfg = { ...base };
+        const yarnOpts = $('#yarn-opts', root), hookOpts = $('#hook-opts', root);
+        function applySize(animate) {
+          const info = makeInfo(t, cfg);
+          yarnOpts.innerHTML = Object.keys(SCALE).map(y => {
+            const h = y === cfg.yarn ? cfg.hook : (y === base.yarn ? base.hook : midHook(y));
+            const cm = makeInfo(t, { yarn: y, hook: h }).cm;
+            return `<button type="button" class="opt" data-yarn="${y}" aria-pressed="${y === cfg.yarn}"><strong>${cm} cm</strong><span>${y}${y === base.yarn ? ' · original' : ''}</span></button>`;
+          }).join('');
+          hookOpts.innerHTML = hooksFor(t, cfg.yarn).map(h => `<button type="button" class="opt" data-hook="${h}" aria-pressed="${h === cfg.hook}"><strong>${h.toFixed(h % 0.5 ? 2 : 1)} mm</strong><span>${US_HOOK[h] ? 'US ' + US_HOOK[h] : '&nbsp;'}</span></button>`).join('');
+          $('[data-out="size"]', root).textContent = info.original ? (t.size || t.sizeCm + ' cm') : `about ${info.cm} cm (${info.inch} in) tall`;
+          $('[data-out="hook"]', root).textContent = info.original ? t.hook : fmtHook(cfg.hook);
+          $('[data-out="yarn"]', root).textContent = cfg.yarn;
+          $('[data-size-reset]', root).hidden = info.original;
+          $('#sizer-note', root).innerHTML = info.original
+            ? 'This is the size shown in the photos.'
+            : `Your ${esc(t.name)} will be about <strong>${info.cm} cm</strong> tall (${info.f > 1 ? '+' : ''}${Math.round((info.f - 1) * 100)}%). The rounds stay exactly the same. Only the yarn, hook, eyes and amounts change, and the materials list below is updated.${info.f > 1.6 ? ' With yarn this thick, do the embroidery with the same yarn or a doubled strand so it still shows.' : ''}${info.f < .75 ? ' Small toys are fiddly: use a stitch marker every round and good light.' : ''}`;
+          matList.innerHTML = t.materials.map((m, i) => `<li><label class="check"><input type="checkbox" data-mat="${i}" ${mats.has(i) ? 'checked' : ''}><span class="box">${I.check}</span><span class="txt">${esc(scaleMaterial(m, cfg, info))}</span></label></li>`).join('');
+          if (animate && !reduced()) matList.animate([{ opacity: .4 }, { opacity: 1 }], { duration: 350, easing: EASE });
+        }
+        root.addEventListener('click', e => {
+          const y = e.target.closest('[data-yarn]'), h = e.target.closest('[data-hook]');
+          if (y) { const yarn = y.dataset.yarn; cfg = { yarn, hook: yarn === base.yarn ? base.hook : midHook(yarn) }; }
+          else if (h) cfg = { ...cfg, hook: +h.dataset.hook };
+          else if (e.target.closest('[data-size-reset]')) cfg = { ...base };
+          else return;
+          store.set(cfgKey, cfg); applySize(true);
+          if (y || h) root.querySelector(y ? `[data-yarn="${cfg.yarn}"]` : `[data-hook="${cfg.hook}"]`)?.focus();
+        });
+        applySize(false);
         // rounds progress
         const pKey = `ll-progress-${t.id}`;
         let done = new Set(store.get(pKey, []));
