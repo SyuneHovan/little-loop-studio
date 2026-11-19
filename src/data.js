@@ -53,6 +53,164 @@ const ABBR = {
 
 const SAMPLE_TOYS = [
   {
+    id: 'pink-sitting-dragon',
+    name: 'Pink Sitting Dragon',
+    date: '2026-11-19',
+    types: ['fantasy'],
+    categories: ['fantasy'],
+    difficulty: 'hard',
+    sizeCm: 15,
+    size: 'about 15 cm (6 in) sitting',
+    hook: '3.0 mm',
+    yarn: 'DK',
+    time: '8–10 hours',
+    colors: [
+      { name: 'Pink', hex: '#E79AB5' }, { name: 'Cream', hex: '#F4EADB' }, { name: 'Yellow', hex: '#E8B53A' },
+    ],
+    tags: ['dragon', 'pink', 'wings', 'tail', 'spikes', 'tapestry crochet', 'sitting'],
+    blurb: 'A sweet pink dragon sitting on its haunches, with cream horns and spikes, striped pink-and-cream wings, golden almond eyes and a curled tail.',
+    photos: [
+      { src: '@img/pink-sitting-dragon-1.jpg', alt: 'Pink Sitting Dragon amigurumi held in a hand: a pink crochet dragon with cream horns, striped pink and cream wings, yellow eyes and a curled tail' },
+      { src: '@img/pink-sitting-dragon-2.jpg', alt: 'Close-up of the dragon head with cream horns, embroidered yellow almond eyes and a small cream spike on the forehead' },
+      { src: '@img/pink-sitting-dragon-3.jpg', alt: 'Close-up of a wing with pink ribs and cream panels, and the round back thigh with toes' },
+    ],
+    materials: [
+      'DK or light worsted yarn in pink, about 120 m',
+      'DK or light worsted yarn in cream, about 35 m',
+      'Yellow yarn, a little for the eyes',
+      '3 mm crochet hook',
+      'Fiberfill stuffing',
+      '1 pipe cleaner for the tail',
+      'Tapestry needle',
+    ],
+    pattern: `## Head
+Pink.
+R1: 6 sc in MR (6)
+R2: inc around (12)
+R3: [sc, inc] x6 (18)
+R4: [sc 2, inc] x6 (24)
+R5: [sc 3, inc] x6 (30)
+R6: [sc 4, inc] x6 (36)
+R7-13: sc around (36)
+R14: [sc 4, dec] x6 (30)
+R15: [sc 3, dec] x6 (24)
+R16: [sc 2, dec] x6 (18)
+Start stuffing firmly.
+R17: [sc, dec] x6 (12)
+R18: dec x6 (6)
+Close the hole and leave a tail to sew.
+## Snout
+Pink.
+R1: 6 sc in MR (6)
+R2: [sc, inc] x3 (9)
+R3: [sc 2, inc] x3 (12)
+R4: [sc 3, inc] x3 (15)
+R5-6: sc around (15)
+Fasten off with a long tail. Sew to the lower front of the head between R9 and R15, stuffing as you go.
+Eyes: with yellow, embroider slanted almond eyes just above the snout sides, 6-7 stitches apart. Add 2 small pink stitches for nostrils.
+## Horn (make 2)
+Cream.
+R1: 4 sc in MR (4)
+R2: [sc, inc] x2 (6)
+R3: [sc 2, inc] x2 (8)
+R4: sc around (8)
+Fasten off. Do not stuff, or stuff lightly. Sew on top of the head at R5-7, angled slightly back.
+## Body and neck
+Pink. Start at the bottom.
+R1: 6 sc in MR (6)
+R2: inc around (12)
+R3: [sc, inc] x6 (18)
+R4: [sc 2, inc] x6 (24)
+R5: [sc 3, inc] x6 (30)
+R6: [sc 4, inc] x6 (36)
+R7: [sc 5, inc] x6 (42)
+R8-15: sc around (42)
+R16: [sc 5, dec] x6 (36)
+R17-19: sc around (36)
+R20: [sc 4, dec] x6 (30)
+R21-22: sc around (30)
+R23: [sc 3, dec] x6 (24)
+R24-25: sc around (24)
+Stuff the body firmly and keep the bottom flat so it sits.
+R26: [sc 2, dec] x6 (18)
+R27-34: sc around (18)
+Stuff the neck firmly. Fasten off with a long tail and sew the head on, tilted slightly down and to one side.
+## Back leg (make 2)
+Pink. This is the big round thigh.
+R1: 6 sc in MR (6)
+R2: inc around (12)
+R3: [sc, inc] x6 (18)
+R4: [sc 2, inc] x6 (24)
+R5-9: sc around (24)
+R10: [sc 2, dec] x6 (18)
+R11: [sc, dec] x6 (12)
+Stuff lightly.
+R12: dec x6 (6)
+Close the hole. Flatten a little and sew to the lower sides of the body (R4-12) so the knees point forward.
+## Back foot (make 2)
+Pink.
+R1: 6 sc in MR (6)
+R2: [sc, inc] x3 (9)
+R3-6: sc around (9)
+Stuff lightly, flatten, and sew under the front of each thigh, pointing forward.
+## Front leg (make 2)
+Pink.
+R1: 6 sc in MR (6)
+R2: [sc, inc] x3 (9)
+R3-4: sc around (9)
+R5: [sc, dec] x3 (6)
+R6-10: sc around (6)
+Stuff only the paw. Sew the open end to the chest at about R17-19, with the paws resting on the thighs.
+## Toe (make 12)
+Pink.
+R1: 4 sc in MR (4)
+R2: sc around (4)
+Fasten off. Sew 3 toes on the front of each back foot and 3 on each front paw.
+## Tail
+Pink. Start at the tip.
+R1: 4 sc in MR (4)
+R2: sc around (4)
+R3: [sc, inc] x2 (6)
+R4-7: sc around (6)
+R8: [sc 2, inc] x2 (8)
+R9-12: sc around (8)
+R13: [sc 3, inc] x2 (10)
+R14-17: sc around (10)
+R18: [sc 4, inc] x2 (12)
+R19-22: sc around (12)
+Fold the end of a pipe cleaner over so it can't poke out. Put it inside and stuff lightly around it. Sew the tail to the lower back, then curl it around to the front beside a back leg.
+## Spike (make 9)
+Cream.
+R1: 4 sc in MR (4)
+R2: [sc, inc] x2 (6)
+Fasten off. Do not stuff. Sew 7 down the middle of the back of the head, neck and back. Sew 1 near the tail tip and 1 small one on the forehead.
+## Wing (make 2)
+Worked flat in rows. P = pink, C = cream. In rows 3-12, carry the unused color inside the stitches (tapestry crochet) so the pink ribs stay straight.
+Row 1: ch 20 in pink, sc in 2nd ch from hook and across (19)
+Row 2: ch 1, turn, sc across (19)
+Row 3-12: ch 1, turn, sc 1 P, sc 5 C, sc 1 P, sc 5 C, sc 1 P, sc 5 C, sc 1 P (19)
+Row 13: points. Ch 1, turn. With pink, sl st 1. Then repeat 3 times: [with cream, sl st 1, hdc 1, (dc, ch 2, dc) in next st, hdc 1, sl st 1; with pink, sl st 1]. You now have 3 points.
+Fasten off and weave in the ends.
+Pinch the short pink edge of Row 1-2 nearest the body into a narrow base. Sew it to the upper back (around R20-24), with the pink arm edge on top and the points facing down and out.`,
+    assembly: [
+      'Sew the snout to the lower front of the head between R9 and R15, stuffing as you go. Embroider the yellow almond eyes and the 2 pink nostril stitches.',
+      'Sew the horns on top of the head at R5–R7, angled slightly back.',
+      'Sew the head onto the neck, tilted slightly down and to one side.',
+      'Sew the back legs to the lower sides of the body (R4–R12) so the knees point forward, then sew a back foot under the front of each thigh.',
+      'Sew the front legs to the chest at about R17–R19, with the paws resting on the thighs.',
+      'Sew 3 toes on the front of each back foot and 3 on each front paw.',
+      'Sew the tail to the lower back and curl it around to the front beside a back leg.',
+      'Sew 7 spikes down the middle of the head, neck and back, 1 near the tail tip and 1 small one on the forehead.',
+      'Sew the wings to the upper back (around R20–R24), pink arm edge on top and points facing down and out.',
+    ],
+    tricky: [
+      { q: 'Straight wing ribs (tapestry crochet)', a: 'In rows 3–12, carry the color you are not using inside your stitches. That keeps the pink ribs in straight lines and hides the floats.' },
+      { q: 'Making it sit', a: 'Stuff the body firmly but keep the bottom flat, so the dragon sits steadily on its own.' },
+      { q: 'Pipe cleaner in the tail', a: 'Fold the end of the pipe cleaner over before you put it in, so it can\'t poke through the stitches. Stuff lightly around it so the tail can still curl.' },
+      { q: 'Almond eyes', a: 'Embroider the eyes slanted, just above the sides of the snout and 6–7 stitches apart. Mark both ends with pins first so they match.' },
+    ],
+  },
+  {
     id: 'mushroom-bunny',
     name: 'Mushroom Bunny',
     date: '2026-11-10',

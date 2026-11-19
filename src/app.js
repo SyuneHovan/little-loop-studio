@@ -532,7 +532,9 @@
     const g = out.match(/about (\d+(?:\.\d+)?) g\b/);
     if (!/floss|thread|embroider/i.test(out)) {
       if (g) out = out.replace(g[0], `about ${Math.max(5, Math.round(+g[1] * Math.pow(info.f, 3) / 5) * 5)} g`);
-      out = out.replace(/\b(fingering|sport|dk|worsted|chunky|super bulky)\b(\s+or\s+(fingering|sport|dk|worsted|chunky))?/i, cfg.yarn);
+      const mt = out.match(/about (\d+(?:\.\d+)?) m\b/);
+      if (mt) out = out.replace(mt[0], `about ${Math.max(5, Math.round(+mt[1] * info.f / 5) * 5)} m`);
+      out = out.replace(/\b(fingering|sport|dk|worsted|chunky|super bulky)\b(\s+or\s+(light\s+)?(fingering|sport|dk|worsted|chunky))?/i, cfg.yarn);
     }
     out = out.replace(/(\d+(?:\.\d+)?)\s*mm crochet hook/i, `${fmtHook(cfg.hook)} crochet hook`);
     out = out.replace(/(\d+(?:\.\d+)?)\s*mm (black )?safety eyes/i, (m, mm, black) => `${snapEye(+mm * info.f)} mm ${black || ''}safety eyes`);
