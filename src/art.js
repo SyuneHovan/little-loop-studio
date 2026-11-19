@@ -130,6 +130,19 @@ const Art = (() => {
         ${eyes(166, 40)}${cheeks(190, 70)}
         ${a.leafHat ? `<path d="M200 90 q-4 -24 8 -34" stroke="#6B4A2E" stroke-width="6" fill="none" stroke-linecap="round"/>${leaf(214, 70, 60, '#5E8A5A')}` : ''}`;
     },
+    vest(a) {
+      const b = a.body, lite = shade(b, 16), band = shade(b, -14), dot = shade(b, 34);
+      const dots = (d, w) => `<path d="${d}" stroke="${band}" stroke-width="${w}" fill="none" stroke-linecap="round"/><path d="${d}" stroke="${dot}" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="1 7" opacity=".7"/>`;
+      return `
+        ${knit(P('M120 82 L170 66 Q200 96 230 66 L280 82 Q268 146 298 176 L304 316 L96 316 L102 176 Q132 146 120 82Z'), shade(b, -8))}
+        ${knit(P('M230 66 L280 82 Q268 146 298 176 L304 316 L118 316Z'), b)}
+        ${dots('M230 66 L118 312', 15)}
+        ${knit(P('M170 66 L120 82 Q132 146 102 176 L96 316 L282 316Z'), lite)}
+        ${dots('M170 66 L282 312', 15)}
+        ${dots('M166 66 Q200 84 234 66', 13)}
+        ${dots('M96 314 L304 314', 22)}
+        ${dots('M121 84 Q133 146 103 176', 9)}${dots('M279 84 Q267 146 297 176', 9)}`;
+    },
   };
 
   const props = a => `

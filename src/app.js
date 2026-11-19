@@ -90,6 +90,11 @@
     });
     return parts.filter(p => p.items.length);
   }
+  // Clothing patterns write numbers as S (M, L), e.g. "ch 78 (86, 96)" or "(76, 84, 94)".
+  // pickSize keeps only the number for the chosen size.
+  const SIZE_TUPLE = /(\d+(?:-\d+)?)\s\((\d+(?:-\d+)?),\s*(\d+(?:-\d+)?)\)/g;
+  const COUNT_TUPLE = /\((\d+),\s*(\d+),\s*(\d+)\)/g;
+  const pickSize = (text, i) => String(text ?? '').replace(SIZE_TUPLE, (m, a, b, c) => [a, b, c][i]).replace(COUNT_TUPLE, (m, a, b, c) => `(${[a, b, c][i]})`);
   const roundsOf = parts => parts.flatMap(p => p.items.filter(i => i.type === 'round'));
 
   /* ---------------- toys ---------------- */
@@ -110,12 +115,12 @@
     if (toy.photos && toy.photos.length) {
       toy.pics = toy.photos.map((p, i) => ({ src: p.src, alt: p.alt || `${toy.name}, photo ${i + 1}` }));
     } else {
-      toy.pics = (toy.photoViews || [0, 1, 2]).map(v => ({ src: artUrl(toy.art, v), alt: `${toy.name} amigurumi, ${Art.views[v].label}` }));
+      toy.pics = (toy.photoViews || [0, 1, 2]).map(v => ({ src: artUrl(toy.art, v), alt: `${toy.name} illustration, ${Art.views[v].label}` }));
       toy.illustrated = true;
     }
-    toy.parts = parsePattern(toy.pattern);
-    toy.sizeId = sizeBucket(+toy.sizeCm || 10);
-    toy.hay = [toy.name, ...toy.types, ...toy.tags, ...toy.colors.map(c => c.name), ...toy.categories.map(id => (CATEGORIES.find(c => c.id === id) || {}).name || id), toy.yarn, toy.difficulty].join(' ').toLowerCase();
+    toy.parts = parsePattern(toy.sizes ? pickSize(toy.pattern, toy.defaultSize ?? 1) : toy.pattern);
+    toy.sizeId = toy.sizes ? null : sizeBucket(+toy.sizeCm || 10);
+    toy.hay = [toy.name, ...toy.types, ...toy.tags, ...toy.colors.map(c => c.name), ...toy.categories.map(id => (CATEGORIES.find(c => c.id === id) || {}).name || id), toy.yarn, toy.difficulty, toy.kind || ''].join(' ').toLowerCase();
     return toy;
   }
   let TOYS = [];
@@ -147,7 +152,7 @@
     const on = favs.has(t.id);
     return `<button class="heart${inline ? ' inline' : ''}" type="button" data-fav="${esc(t.id)}" aria-pressed="${on}" aria-label="${on ? 'Remove' : 'Save'} ${esc(t.name)} ${on ? 'from' : 'to'} favorites">${I.heart}</button>`;
   };
-  const metaLine = t => `${cap(t.difficulty)} · ${esc(t.sizeCm)} cm · ${esc(t.yarn)}`;
+  const metaLine = t => t.sizes ? `${cap(t.difficulty)} · Sizes ${t.sizes.map(z => esc(z.label)).join(', ')} · ${esc(t.yarn)}` : `${cap(t.difficulty)} · ${esc(t.sizeCm)} cm · ${esc(t.yarn)}`;
   const cardHTML = (t, i = 0) => `
     <article class="card reveal" data-id="${esc(t.id)}" style="transition-delay:${(i % 4) * 60}ms">
       <a class="card-link" href="#toy-${esc(t.id)}">
@@ -206,7 +211,7 @@
     { key: 'cat', title: 'Category', opts: () => CATEGORIES.map(c => ({ v: c.id, label: c.name })), get: t => t.categories },
     { key: 'type', title: 'Animal or character', opts: () => [...new Set([...TYPES, ...TOYS.flatMap(t => t.types)])].map(v => ({ v, label: cap(v) })), get: t => t.types },
     { key: 'diff', title: 'Difficulty', opts: () => DIFFICULTIES.map(v => ({ v, label: cap(v) })), get: t => [t.difficulty] },
-    { key: 'size', title: 'Finished size', opts: () => SIZES.map(s => ({ v: s.id, label: s.name })), get: t => [t.sizeId] },
+    { key: 'size', title: 'Finished size', opts: () => SIZES.map(s => ({ v: s.id, label: s.name })), get: t => t.sizeId ? [t.sizeId] : [] },
     { key: 'yarn', title: 'Yarn weight', opts: () => YARNS.map(v => ({ v, label: v })), get: t => [t.yarn] },
   ];
   const activeCount = () => GROUPS.reduce((n, g) => n + F[g.key].size, 0);
@@ -543,8 +548,18 @@
   }
 
   function viewToy(id) {
-    const t = byId(id);
+    let t = byId(id);
     if (!t) return viewNotFound();
+    // clothing: show only the numbers for the chosen size
+    const wKey = `ll-wsize-${t.id}`;
+    const sizeIdx = t.sizes ? Math.min(t.sizes.length - 1, Math.max(0, +store.get(wKey, t.defaultSize ?? 1) || 0)) : null;
+    if (t.sizes) {
+      const P = x => pickSize(x, sizeIdx);
+      t = { ...t, parts: parsePattern(P(t.pattern)), materials: t.materials.map(P), assembly: t.assembly.map(P), tricky: t.tricky.map(x => ({ q: P(x.q), a: P(x.a) })) };
+    }
+    const sz = t.sizes ? t.sizes[sizeIdx] : null;
+    const allRounds = roundsOf(t.parts);
+    const unitWord = allRounds.filter(r => r.label.startsWith('Row')).length > allRounds.length / 2 ? 'rows' : 'rounds';
     const total = roundsOf(t.parts).length;
     const abbr = abbreviationsFor(t);
     const rel = related(t);
@@ -552,7 +567,7 @@
     const sizePref = store.get('ll-textsize', 1);
     const catNames = t.categories.map(c => (CATEGORIES.find(x => x.id === c) || { name: c }).name).join(' · ');
     return {
-      title: `${t.name} amigurumi pattern · ${SITE.name}`,
+      title: `${t.name} ${t.sizes ? 'crochet' : 'amigurumi'} pattern · ${SITE.name}`,
       desc: t.blurb,
       html: `
       <div class="container crumbs"><a href="#browse">${I.back} All patterns</a></div>
@@ -569,6 +584,8 @@
           <p class="kicker">${esc(catNames)}</p>
           <h1>${esc(t.name)}</h1>
           <p class="lede">${esc(t.blurb)}</p>
+          ${t.credit ? `<p class="credit">${esc(t.credit)}</p>` : ''}
+          ${t.untested ? `<p class="notice">${I.note}<span>${esc(t.untested)}</span></p>` : ''}
           <div class="toy-actions">
             <a class="btn btn-primary" href="#" data-jump="pattern-start">Start the pattern</a>
             ${heartBtn(t, true)}
@@ -576,23 +593,28 @@
           </div>
           <section class="facts" aria-label="Quick facts">
             <dl>
-              ${fact('Finished size', `<span data-out="size">${esc(t.size || t.sizeCm + ' cm')}</span>`)}
+              ${sz ? fact(`Size ${esc(sz.label)}`, `${esc(sz.fits)}<br><span class="muted" style="font-weight:500">${esc(sz.chest || '')}</span>`) : fact('Finished size', `<span data-out="size">${esc(t.size || t.sizeCm + ' cm')}</span>`)}
               ${fact('Difficulty', cap(esc(t.difficulty)))}
               ${fact('Hook', `<span data-out="hook">${esc(t.hook)}</span>`)}
               ${fact('Yarn weight', `<span data-out="yarn">${esc(t.yarn)}</span>`)}
               ${fact('Time', esc(t.time))}
-              ${fact('Rounds', `${total}`)}
+              ${fact(cap(unitWord), `${total}`)}
+              ${t.gauge ? fact('Gauge', esc(t.gauge), true) : ''}
               ${fact('Colors', `<span class="color-list">${t.colors.map(c => `<span><i class="dot-c" style="background:${esc(c.hex)}"></i>${esc(c.name)}</span>`).join('')}</span>`, true)}
             </dl>
           </section>
-          <section class="sizer" aria-labelledby="sizer-h">
+          ${sz ? `<section class="sizer" aria-labelledby="sizer-h">
+            <div class="sizer-head"><h2 id="sizer-h">Choose your size</h2></div>
+            <div class="opts" role="group" aria-labelledby="sizer-h" style="margin-top:12px">${t.sizes.map((z, i) => `<button type="button" class="opt" data-wsize="${i}" aria-pressed="${i === sizeIdx}"><strong>${esc(z.label)}</strong><span>${esc(z.fits)}</span></button>`).join('')}</div>
+            <p class="sizer-note">The pattern, materials and assembly below show the numbers for size <strong>${esc(sz.label)}</strong> only. ${esc(t.sizeNote || '')}</p>
+          </section>` : `<section class="sizer" aria-labelledby="sizer-h">
             <div class="sizer-head"><h2 id="sizer-h">Make it your size</h2><button type="button" class="btn-link" data-size-reset hidden>Use original</button></div>
             <p class="sizer-label" id="yarn-l">Toy size, by yarn weight</p>
             <div class="opts" role="group" aria-labelledby="yarn-l" id="yarn-opts"></div>
             <p class="sizer-label" id="hook-l">Hook size</p>
             <div class="opts hooks" role="group" aria-labelledby="hook-l" id="hook-opts"></div>
             <p class="sizer-note" id="sizer-note" aria-live="polite"></p>
-          </section>
+          </section>`}
           ${t.tags.length ? `<p class="tag-line">${t.tags.map(g => `<a href="#browse" data-tag="${esc(g)}">#${esc(g)}</a>`).join('&ensp;')}</p>` : ''}
         </div>
       </div>
@@ -606,14 +628,14 @@
 
           <section class="sec" aria-labelledby="map-h">
             <h2 id="map-h">Parts</h2>
-            <p class="sec-note">Every piece you'll make for this toy.</p>
+            <p class="sec-note">Every piece you'll make for this ${t.sizes ? 'project' : 'toy'}.</p>
             <div class="mindmap-wrap">${mindMap(t)}</div>
           </section>
 
           <section class="sec" aria-labelledby="pattern-start">
             <h2 id="pattern-start" tabindex="-1">Pattern</h2>
             <div class="tracker" aria-live="polite">
-              <div class="tracker-top"><strong id="pdone">0 of ${total} rounds</strong><span class="muted" id="pct">0%</span></div>
+              <div class="tracker-top"><strong id="pdone">0 of ${total} ${unitWord}</strong><span class="muted" id="pct">0%</span></div>
               <div class="pbar" role="progressbar" aria-label="Pattern progress" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="0" id="pbar"><i></i></div>
             </div>
             <div class="tools">
@@ -630,7 +652,7 @@
               <details class="fold">
                 <summary><span class="s-title">Abbreviations <small>US terms</small></span><span class="chev">${I.chev}</span></summary>
                 <div class="fold-body"><div class="fold-inner">
-                  <table class="abbr-table"><tbody>${abbr.map(k => `<tr><th scope="row">${esc(k)}</th><td>${esc(ABBR[k])}</td></tr>`).join('')}</tbody></table>
+                  <table class="abbr-table"><tbody>${(t.abbr || abbr.map(k => [k, ABBR[k]])).map(([k, v]) => `<tr><th scope="row">${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}</tbody></table>
                 </div></div>
               </details>
               ${t.parts.map((p, pi) => {
@@ -690,7 +712,16 @@
           const c = e.target.closest('[data-mat]'); if (!c) return;
           c.checked ? mats.add(+c.dataset.mat) : mats.delete(+c.dataset.mat); store.set(matKey, [...mats]);
         });
-        // size & hook
+        // size & hook (toys) or S/M/L (clothing)
+        if (t.sizes) {
+          matList.innerHTML = t.materials.map((m, i) => `<li><label class="check"><input type="checkbox" data-mat="${i}" ${mats.has(i) ? 'checked' : ''}><span class="box">${I.check}</span><span class="txt">${esc(m)}</span></label></li>`).join('');
+          root.addEventListener('click', e => {
+            const b = e.target.closest('[data-wsize]'); if (!b) return;
+            store.set(wKey, +b.dataset.wsize); render();
+            $(`[data-wsize="${b.dataset.wsize}"]`)?.focus({ preventScroll: true });
+            toast(`Showing size ${t.sizes[+b.dataset.wsize].label}`);
+          });
+        } else {
         const base = makeBase(t), cfgKey = `ll-make-${t.id}`;
         let cfg = { ...base, ...store.get(cfgKey, {}) };
         if (!SCALE[cfg.yarn] || !hooksFor(t, cfg.yarn).includes(cfg.hook)) cfg = { ...base };
@@ -723,8 +754,9 @@
           if (y || h) root.querySelector(y ? `[data-yarn="${cfg.yarn}"]` : `[data-hook="${cfg.hook}"]`)?.focus();
         });
         applySize(false);
-        // rounds progress
-        const pKey = `ll-progress-${t.id}`;
+        }
+        // rounds progress (kept separately for each clothing size)
+        const pKey = `ll-progress-${t.id}${sz ? '-' + sz.id : ''}`;
         let done = new Set(store.get(pKey, []));
         const boxes = $$('[data-round]', root);
         boxes.forEach(b => { b.checked = done.has(b.dataset.round); });
@@ -734,7 +766,7 @@
           $('#pct', root).textContent = pct + '%';
           $('#pbar i', root).style.width = pct + '%';
           $('#pbar', root).setAttribute('aria-valuenow', n);
-          $('#pdone', root).textContent = `${n} of ${total} rounds`;
+          $('#pdone', root).textContent = `${n} of ${total} ${unitWord}`;
           t.parts.forEach((p, pi) => {
             const bs = boxes.filter(b => +b.dataset.part === pi), d = bs.filter(b => b.checked).length;
             const meta = $(`[data-pmeta="${pi}"]`, root), side = $(`[data-side="${pi}"]`, root);

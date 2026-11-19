@@ -21,6 +21,7 @@ const CATEGORIES = [
   { id: 'plants', name: 'Plants & mushrooms', color: '#E9EFD9', ink: '#55702F', icon: 'mushroom' },
   { id: 'small', name: 'Small items & keychains', color: '#F5ECCB', ink: '#7A5A1E', icon: 'key' },
   { id: 'seasonal', name: 'Seasonal', color: '#F3E0D2', ink: '#8C4A2A', icon: 'leaf' },
+  { id: 'wearables', name: 'Clothing & wearables', color: '#E6E7EC', ink: '#4B4D5C', icon: 'leaf' },
 ];
 
 const TYPES = ['bunny', 'bear', 'cat', 'frog', 'mushroom', 'fantasy', 'food'];
@@ -52,6 +53,136 @@ const ABBR = {
 };
 
 const SAMPLE_TOYS = [
+  {
+    id: 'crossover-wrap-vest',
+    name: 'Crossover Wrap Vest',
+    kind: 'clothing',
+    date: '2026-11-19',
+    types: [],
+    categories: ['wearables'],
+    difficulty: 'medium',
+    sizes: [
+      { id: 'S', label: 'S', fits: 'Bust 81–86 cm (32–34 in)', chest: 'Finished chest 84 cm (33 in)' },
+      { id: 'M', label: 'M', fits: 'Bust 89–97 cm (35–38 in)', chest: 'Finished chest 94 cm (37 in)' },
+      { id: 'L', label: 'L', fits: 'Bust 99–107 cm (39–42 in)', chest: 'Finished chest 104 cm (41 in)' },
+    ],
+    defaultSize: 1,
+    sizeNote: 'Length from shoulder to hem is about 37 cm (14.5 in) in all sizes. The fit is close, with about 0–3 cm of ease.',
+    hook: '4 mm (US G-6)',
+    yarn: 'DK',
+    time: '15–20 hours',
+    gauge: '18 hdc3 × 14 rows = 10 cm in the body stitch; 20 sts × 18 rows = 10 cm in griddle stitch (sc, dc)',
+    colors: [{ name: 'Charcoal heather', hex: '#4B4D5C' }],
+    tags: ['vest', 'wrap vest', 'crossover top', 'cropped vest', 'griddle stitch', 'knit look', 'sleeveless top', 'layering'],
+    blurb: 'A cropped, cosy vest whose two front panels cross over the chest and wrap around to button at the back. Textured bands frame the smooth, knit-look body and rise into a little stand-up collar.',
+    credit: 'Inspired by a knitted crossover wrap vest by Robin Reich (thetwistedyarn.com). This crochet version is a new pattern.',
+    untested: 'New pattern: it hasn\'t been test-made yet. Please check your gauge before you start.',
+    art: { kind: 'vest', body: '#4B4D5C' },
+    photoViews: [0, 2],
+    abbr: [
+      ['ch', 'chain'], ['sc', 'single crochet'], ['hdc', 'half double crochet'], ['dc', 'double crochet'],
+      ['hdc3', 'hdc worked in the 3rd loop (the horizontal bar just below the top V, on the side facing away from you)'],
+      ['hdc2tog', 'half double crochet 2 together, worked through the 3rd loops'],
+      ['sl st', 'slip stitch'], ['sk', 'skip'], ['st(s)', 'stitch(es)'], ['sp', 'space'], ['R', 'round'],
+    ],
+    materials: [
+      'DK wool or wool-alpaca blend in Charcoal heather, about 275 (325, 375) g / 620 (730, 845) m',
+      '4 mm (US G-6) crochet hook',
+      '2 wooden buttons, 18 mm',
+      'Tapestry needle',
+      'Stitch markers',
+      'Rust-proof pins and a blocking mat or towel',
+    ],
+    pattern: `## Back
+Charcoal heather.
+Row 1: ch 78 (86, 96), hdc in 3rd ch from hook and in each ch across (76, 84, 94)
+Row 2-15: ch 1, turn, hdc3 across (76, 84, 94)
+Armhole shaping starts here.
+Row 16: turn, sl st in first 3 sts, ch 1, hdc3 in next st and in each st across to last 3 sts, leave the last 3 sts unworked (70, 78, 88)
+Row 17: ch 1, turn, hdc2tog, hdc3 across to last 2 sts, hdc2tog (68, 76, 86)
+Row 18: ch 1, turn, hdc2tog, hdc3 across to last 2 sts, hdc2tog (66, 74, 84)
+Row 19-44: ch 1, turn, hdc3 across (66, 74, 84)
+Fasten off. Place markers 19 (22, 26) sts in from each end of Row 44. These outer sts are the shoulders, and the 28 (30, 32) sts in the middle are the back neck.
+## Right front
+Charcoal heather.
+This is the under panel. Row 1 ends at the front edge, so the odd rows end at the front edge and the even rows begin at it.
+Row 1: ch 69 (72, 76), hdc in 3rd ch from hook and in each ch across (67, 70, 74)
+Row 2: ch 1, turn, hdc2tog, hdc3 across (66, 69, 73)
+Row 3: ch 1, turn, hdc3 across to last 2 sts, hdc2tog (65, 68, 72)
+Row 4-15: repeat Row 2 and Row 3 in turn, 6 times each (53, 56, 60)
+Armhole shaping starts here, at the side edge.
+Row 16: ch 1, turn, hdc2tog, hdc3 across to last 3 sts, leave the last 3 sts unworked (49, 52, 56)
+Row 17: ch 1, turn, hdc2tog, hdc3 across to last 2 sts, hdc2tog (47, 50, 54)
+Row 18: ch 1, turn, hdc2tog, hdc3 across to last 2 sts, hdc2tog (45, 48, 52)
+Row 19-44: repeat Row 3 and Row 2 in turn, 13 times each (19, 22, 26)
+Fasten off. The last row is the shoulder.
+## Left front
+Charcoal heather.
+This is the over panel. Row 1 ends at the side edge, so the odd rows begin at the front edge and the even rows end at it.
+Row 1: ch 69 (72, 76), hdc in 3rd ch from hook and in each ch across (67, 70, 74)
+Row 2: ch 1, turn, hdc3 across to last 2 sts, hdc2tog (66, 69, 73)
+Row 3: ch 1, turn, hdc2tog, hdc3 across (65, 68, 72)
+Row 4-15: repeat Row 2 and Row 3 in turn, 6 times each (53, 56, 60)
+Armhole shaping starts here, at the side edge.
+Row 16: turn, sl st in first 3 sts, ch 1, hdc3 in next st and in each st across to last 2 sts, hdc2tog (49, 52, 56)
+Row 17: ch 1, turn, hdc2tog, hdc3 across to last 2 sts, hdc2tog (47, 50, 54)
+Row 18: ch 1, turn, hdc2tog, hdc3 across to last 2 sts, hdc2tog (45, 48, 52)
+Row 19-44: repeat Row 3 and Row 2 in turn, 13 times each (19, 22, 26)
+Fasten off. The last row is the shoulder.
+## Hem band (make 2)
+Charcoal heather.
+One band goes on the back hem. The other goes on the Right Front hem and reaches across to the left side seam.
+Row 1: ch 13, sc in 2nd ch from hook, dc in next ch, [sc, dc] x5 (12)
+Row 2-76 (2-84, 2-94): ch 1, turn, [sc, dc] x6 (12)
+Fasten off, leaving a long tail for sewing.
+## Waist strap
+Charcoal heather.
+This strap is sewn to the Left Front hem, then wraps around the right side and buttons at the back. Start at the buttonhole end.
+Row 1: ch 13, sc in 2nd ch from hook, dc in next ch, [sc, dc] x5 (12)
+Row 2-3: ch 1, turn, [sc, dc] x6 (12)
+Row 4: ch 1, turn, sc, dc, ch 2, sk 2 sts, [sc, dc] x2, ch 2, sk 2 sts, sc, dc (12)
+Row 5: ch 1, turn, [sc, dc] x6, working 1 st in each st and in each ch (12)
+Row 6-124 (6-136, 6-150): ch 1, turn, [sc, dc] x6 (12)
+Fasten off, leaving a long tail for sewing.
+## Front band and collar
+Charcoal heather.
+Row 1: ch 11, sc in 2nd ch from hook, dc in next ch, [sc, dc] x4 (10)
+Row 2-168 (2-170, 2-172): ch 1, turn, [sc, dc] x5 (10)
+Fasten off, leaving a long tail for sewing. Place a marker on Row 84 (85, 86). This is the center back of the collar.
+## Armhole edging (make 2)
+Charcoal heather.
+Work these after the vest is sewn together. Join the yarn at the underarm side seam.
+R1: ch 1, sc evenly around the armhole, 45 sts along each piece (3 sc along the 3 skipped sts, 1 sc in each row end of Rows 16-18, then 3 sc in every 2 row ends up to the shoulder), sl st to first sc (90)
+R2: ch 1, [sc, dc] x45, sl st to first sc (90)
+R3: ch 1, [dc, sc] x45, sl st to first dc (90)
+R4: ch 1, [sc, dc] x45, sl st to first sc (90)
+Fasten off and weave in the ends.`,
+    assembly: [
+      'Weave in all ends except the sewing tails. Pin each piece to its measurements, mist with water and let it dry. The back should measure 42 (47, 52) cm wide and 31 cm tall.',
+      'Sew the shoulders: lay the last row of each front on the matching shoulder sts of the back (19 (22, 26) sts) and whipstitch. Leave the middle 28 (30, 32) back sts open as the back neck.',
+      'Sew one Hem band along the foundation edge of the back, 1 band row to 1 back st, so the band runs from side edge to side edge.',
+      'Sew the second Hem band along the foundation edge of the Right Front, starting at the side edge, 1 band row to 1 st. The last 9 (14, 20) band rows extend past the front tip.',
+      'Sew the last 67 (70, 74) rows of the Waist strap along the foundation edge of the Left Front, 1 strap row to 1 st. The non-buttonhole end of the strap should line up with the side edge, and the buttonhole end stays free past the front tip.',
+      'Sew the right side seam: the back and its hem band to the Right Front and its hem band.',
+      'Lay the Right Front flat, then cross the Left Front over it. Bring the free end of the Right Front hem band across to the left side, under the Left Front. Sew the left side seam through all layers: the back and its hem band, the Left Front and the strap end, and the end of the Right Front hem band tucked between them.',
+      'Pin the Front band and collar along the neckline. Match its center marker to the center of the back neck, then pin evenly down the diagonal edge of each front to the top of the hem band or strap. Sew in place along one long edge, then tack each short end to the top of the band below it.',
+      'Work the Armhole edging around each armhole.',
+      'Try the vest on and wrap the strap around your right side and across your back. Mark the buttonhole positions on the back hem band, about 3.5 cm to the left of center (as worn), and sew on the 2 buttons.',
+      'Weave in all remaining ends and lightly steam the seams flat.',
+    ],
+    tricky: [
+      { q: 'Check your gauge first', a: 'Crochet a swatch before you start: 18 hdc3 × 14 rows should measure 10 cm. If you have more stitches than the gauge, go up a hook size; if you have fewer, go down.' },
+      { q: 'Finding the 3rd loop', a: 'Turn your work so you can see the back of the row. Below the top V of each hdc there is a horizontal bar, and that bar is the 3rd loop. Working into it pushes the V forward and gives the knit-look ridges. Always work into the same side so every row looks alike.' },
+      { q: 'Hdc2tog in the 3rd loop', a: 'Yarn over, insert the hook in the 3rd loop of the next st and pull up a loop. Yarn over, insert in the 3rd loop of the following st and pull up a loop. Yarn over and pull through all 5 loops. Count your sts after each decrease row.' },
+      { q: 'Keeping the diagonal on the right edge', a: 'Put a marker on the front edge after Row 1 and move it up every few rows. Every row has one decrease at the marked edge. If a row\'s decrease lands at the side edge instead, rip back that row.' },
+      { q: 'Left and Right Fronts are mirror images', a: 'They are written separately on purpose. Do not make two of the same front, or the ridged side will face inward on one of them. Hold the finished fronts side by side before sewing: the diagonals should slant toward each other.' },
+      { q: 'Griddle stitch rhythm', a: 'The bands alternate sc and dc. Because each row has an even number of sts, every sc lands on a dc and every dc lands on an sc without any extra counting, which builds the seed-stitch bumps. If two sc end up stacked, you missed a st.' },
+      { q: 'Sewing the band to the diagonal', a: 'The diagonal edge is a mix of row ends and decreases, so it stretches. Pin the band at the center back, both shoulders and both lower ends first, then fill in the pins evenly between them before sewing. The band should lie flat without rippling.' },
+      { q: 'Making the collar stand up', a: 'Sew the band with small, firm stitches along the back neck and do not stretch it there. The extra band length at the back neck makes it rise into a little stand collar.' },
+      { q: 'Making it longer', a: 'Add rows to Rows 2–15 of the back and both fronts, and add the same number of rows to the Front band and collar for every 2 rows you add.' },
+      { q: 'Choosing yarn', a: 'Choose a soft yarn with a little halo, such as wool-alpaca, to get the same heathered look.' },
+    ],
+  },
   {
     id: 'pink-sitting-dragon',
     name: 'Pink Sitting Dragon',
