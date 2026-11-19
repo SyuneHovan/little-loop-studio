@@ -34,6 +34,10 @@ Any other line becomes a note.
 
 Each pattern page lets crocheters pick a yarn weight and hook size. The stitch counts stay the same; the page estimates the finished height from typical amigurumi gauge and updates the hook, yarn amounts (they scale with volume), safety eye size and stuffing. The gauge table is `SCALE` in `src/app.js`.
 
+## Clothing (sizes S/M/L)
+
+Give an item `sizes` (see the Crossover Wrap Vest in `src/data.js`) and write numbers as `S (M, L)`, e.g. `ch 78 (86, 96)`, `(76, 84, 94)` or `Row 2-76 (2-84, 2-94)`. The pattern page shows a size picker, and the pattern, materials and assembly show only the chosen size's numbers. Progress is saved separately for each size.
+
 ## Adding toys
 
 Go to **Pattern studio** in the footer (`#admin`). The default code is `loops`; change `adminCode` in `src/data.js`.
