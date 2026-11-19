@@ -131,17 +131,27 @@ const Art = (() => {
         ${a.leafHat ? `<path d="M200 90 q-4 -24 8 -34" stroke="#6B4A2E" stroke-width="6" fill="none" stroke-linecap="round"/>${leaf(214, 70, 60, '#5E8A5A')}` : ''}`;
     },
     vest(a) {
-      const b = a.body, lite = shade(b, 16), band = shade(b, -14), dot = shade(b, 34);
-      const dots = (d, w) => `<path d="${d}" stroke="${band}" stroke-width="${w}" fill="none" stroke-linecap="round"/><path d="${d}" stroke="${dot}" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="1 7" opacity=".7"/>`;
-      return `
-        ${knit(P('M120 82 L170 66 Q200 96 230 66 L280 82 Q268 146 298 176 L304 316 L96 316 L102 176 Q132 146 120 82Z'), shade(b, -8))}
-        ${knit(P('M230 66 L280 82 Q268 146 298 176 L304 316 L118 316Z'), b)}
-        ${dots('M230 66 L118 312', 15)}
-        ${knit(P('M170 66 L120 82 Q132 146 102 176 L96 316 L282 316Z'), lite)}
-        ${dots('M170 66 L282 312', 15)}
-        ${dots('M166 66 Q200 84 234 66', 13)}
-        ${dots('M96 314 L304 314', 22)}
-        ${dots('M121 84 Q133 146 103 176', 9)}${dots('M279 84 Q267 146 297 176', 9)}`;
+      const b = a.body, lite = shade(b, 14), deep = shade(b, -10), band = shade(b, -16), dot = shade(b, 36);
+      const dots = (d, w) => `<path d="${d}" stroke="${band}" stroke-width="${w}" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" stroke="${dot}" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-dasharray="1 6" opacity=".75"/>`;
+      // a simple dress form behind the vest
+      const form = `<path d="M188 40 q12 -22 24 0 v22 h-24z" fill="#D9B48A"/><path d="M150 70 Q200 52 250 70 L262 330 L138 330Z" fill="#F3EFE8"/>`;
+      if (a.back) return `${form}
+        ${knit(P('M104 106 Q120 86 160 80 Q200 92 240 80 Q280 86 296 106 Q284 160 302 196 L300 300 L100 300 L98 196 Q116 160 104 106Z'), b)}
+        ${dots('M104 108 Q118 160 99 198', 9)}${dots('M296 108 Q282 160 301 198', 9)}
+        ${dots('M160 82 Q200 98 240 82', 14)}
+        ${dots('M150 96 L136 296', 13)}${dots('M250 96 L264 296', 13)}
+        ${dots('M98 306 L302 306', 26)}
+        <circle cx="206" cy="300" r="7" fill="#C9A27A"/><circle cx="226" cy="312" r="7" fill="#C9A27A"/>
+        <circle cx="206" cy="300" r="2" fill="${band}"/><circle cx="226" cy="312" r="2" fill="${band}"/>`;
+      return `${form}
+        ${knit(P('M104 106 Q120 86 162 80 L238 80 Q280 86 296 106 Q284 160 302 196 L300 296 Q200 330 100 296 L98 196 Q116 160 104 106Z'), deep)}
+        ${knit(P('M238 80 Q280 86 296 106 Q284 160 302 196 L300 296 Q240 316 150 318Z'), b)}
+        ${dots('M226 54 L232 86 L150 312', 14)}
+        ${knit(P('M162 80 Q120 86 104 106 Q116 160 98 196 L100 296 Q170 320 252 318Z'), lite)}
+        ${dots('M174 54 L168 86 L252 312', 14)}
+        ${dots('M174 54 Q200 64 226 54', 12)}
+        ${dots('M104 108 Q118 160 99 198', 9)}${dots('M296 108 Q282 160 301 198', 9)}
+        ${dots('M100 300 Q200 334 300 300', 22)}`;
     },
   };
 
@@ -158,12 +168,13 @@ const Art = (() => {
     { vb: '86 34 228 228', label: 'close-up of the face', bg: 1 },
     { vb: '20 20 360 360', label: 'three-quarter view', bg: 2, tilt: -6 },
     { vb: '176 206 168 168', label: 'detail', bg: 1 },
+    { vb: '0 0 400 400', label: 'back view', bg: 0 },
   ];
 
   function svg(a, v = 0) {
     const view = views[v] || views[0];
     const bg = ['#EFEBE5', '#EAE5DE', '#F1EDE7'][view.bg % 3];
-    const toy = (kinds[a.kind] || kinds.bear)(a);
+    const toy = (kinds[a.kind] || kinds.bear)(view.label === 'back view' ? { ...a, back: true } : a);
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${view.vb}">
       <defs><pattern id="st" width="10" height="9" patternUnits="userSpaceOnUse"><path d="M1.5 1.5 L5 7 L8.5 1.5" stroke="#000" stroke-opacity=".05" fill="none" stroke-width="1.5" stroke-linecap="round"/></pattern>
       <radialGradient id="glow" cx=".5" cy=".38" r=".7"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>

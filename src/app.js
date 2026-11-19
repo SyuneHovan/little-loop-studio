@@ -584,7 +584,7 @@
           <p class="kicker">${esc(catNames)}</p>
           <h1>${esc(t.name)}</h1>
           <p class="lede">${esc(t.blurb)}</p>
-          ${t.credit ? `<p class="credit">${esc(t.credit)}</p>` : ''}
+          ${t.credit ? `<p class="credit">${esc(t.credit)}${t.creditUrl ? ` <a href="${esc(t.creditUrl)}" rel="noopener">See the original design</a>` : ''}</p>` : ''}
           ${t.untested ? `<p class="notice">${I.note}<span>${esc(t.untested)}</span></p>` : ''}
           <div class="toy-actions">
             <a class="btn btn-primary" href="#" data-jump="pattern-start">Start the pattern</a>

@@ -75,10 +75,11 @@ const SAMPLE_TOYS = [
     colors: [{ name: 'Charcoal heather', hex: '#4B4D5C' }],
     tags: ['vest', 'wrap vest', 'crossover top', 'cropped vest', 'griddle stitch', 'knit look', 'sleeveless top', 'layering'],
     blurb: 'A cropped, cosy vest whose two front panels cross over the chest and wrap around to button at the back. Textured bands frame the smooth, knit-look body and rise into a little stand-up collar.',
-    credit: 'Inspired by a knitted crossover wrap vest by Robin Reich (thetwistedyarn.com). This crochet version is a new pattern.',
+    credit: 'Inspired by a knitted crossover wrap vest by Robin Reich. This crochet version is a new pattern.',
+    creditUrl: 'https://thetwistedyarn.com',
     untested: 'New pattern: it hasn\'t been test-made yet. Please check your gauge before you start.',
     art: { kind: 'vest', body: '#4B4D5C' },
-    photoViews: [0, 2],
+    photoViews: [0, 4],
     abbr: [
       ['ch', 'chain'], ['sc', 'single crochet'], ['hdc', 'half double crochet'], ['dc', 'double crochet'],
       ['hdc3', 'hdc worked in the 3rd loop (the horizontal bar just below the top V, on the side facing away from you)'],
