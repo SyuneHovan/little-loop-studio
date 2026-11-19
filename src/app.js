@@ -113,7 +113,7 @@
       toy.art = { kind, body: c[0] || '#E9D8BC', belly: kind === 'bunny' || kind === 'cat' ? null : (c[1] || '#F3EBD8'), ear: c[0], leaf: c[1] || '#5E8A5A', seed: c[2] || '#F2DC8A', wing: c[1] || '#8FAE7E', horn: '#E9D8BC', crown: c[2] || '#D9B04A', moon: c[1] || '#EBCB72', pot: c[2] || '#D9A441', yarn: c[1] || c[0] || '#8FAE7E' };
     }
     if (toy.photos && toy.photos.length) {
-      toy.pics = toy.photos.map((p, i) => ({ src: p.src, alt: p.alt || `${toy.name}, photo ${i + 1}` }));
+      toy.pics = toy.photos.map((p, i) => ({ src: p.src, alt: p.alt || `${toy.name}, photo ${i + 1}`, caption: p.caption || '' }));
     } else {
       toy.pics = (toy.photoViews || [0, 1, 2]).map(v => ({ src: artUrl(toy.art, v), alt: `${toy.name} illustration, ${Art.views[v].label}` }));
       toy.illustrated = true;
@@ -574,7 +574,7 @@
       <div class="container toy-top">
         <div class="gallery" aria-roledescription="carousel" aria-label="${esc(t.name)} photos">
           <div class="g-track" id="g-track">
-            ${t.pics.map((p, i) => `<button type="button" class="g-slide" data-zoom="${i}" aria-label="Open photo ${i + 1} of ${t.pics.length} full screen"><img src="${p.src}" alt="${esc(p.alt)}" ${i ? 'loading="lazy"' : ''} decoding="async" width="600" height="600"></button>`).join('')}
+            ${t.pics.map((p, i) => `<button type="button" class="g-slide" data-zoom="${i}" aria-label="Open photo ${i + 1} of ${t.pics.length} full screen"><img src="${p.src}" alt="${esc(p.alt)}" ${i ? 'loading="lazy"' : ''} decoding="async" width="600" height="600">${p.caption ? `<span class="g-cap">${esc(p.caption)}</span>` : ''}</button>`).join('')}
           </div>
           ${t.pics.length > 1 ? `<button type="button" class="g-nav prev" aria-label="Previous photo">${I.left}</button><button type="button" class="g-nav next" aria-label="Next photo">${I.right}</button>
           <div class="g-dots">${t.pics.map((_, i) => `<button type="button" aria-label="Show photo ${i + 1}" aria-current="${i === 0}" data-go="${i}"></button>`).join('')}</div>
@@ -833,7 +833,7 @@
     const lb = $('#lightbox'), img = $('img', lb), stage = $('.lb-stage', lb);
     stage.classList.remove('zoomed');
     img.src = LB.pics[LB.i].src; img.alt = LB.pics[LB.i].alt;
-    $('#lb-count').textContent = `${LB.i + 1} / ${LB.pics.length}`;
+    $('#lb-count').textContent = `${LB.i + 1} / ${LB.pics.length}${LB.pics[LB.i].caption ? ' · ' + LB.pics[LB.i].caption : ''}`;
     $$('.lb-nav', lb).forEach(b => { b.hidden = LB.pics.length < 2; });
   }
   function closeLightbox() {

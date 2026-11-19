@@ -78,8 +78,12 @@ const SAMPLE_TOYS = [
     credit: 'Inspired by a knitted crossover wrap vest by Robin Reich. This crochet version is a new pattern.',
     creditUrl: 'https://thetwistedyarn.com',
     untested: 'New pattern: it hasn\'t been test-made yet. Please check your gauge before you start.',
+    photos: [
+      { src: '@img/crossover-wrap-vest-1.jpg', alt: 'Front of the original knitted crossover wrap vest in charcoal on a dress form, with the stand-up collar and crossed front bands', caption: 'Original knitted design and photo by Robin Reich (thetwistedyarn.com), used with permission' },
+      { src: '@img/crossover-wrap-vest-2.jpg', alt: 'Side view of the original knitted vest showing the textured bands crossing over the chest', caption: 'Original knitted design and photo by Robin Reich (thetwistedyarn.com), used with permission' },
+      { src: '@img/crossover-wrap-vest-3.jpg', alt: 'Back of the original knitted vest with the waist strap fastened by two wooden buttons', caption: 'Original knitted design and photo by Robin Reich (thetwistedyarn.com), used with permission' },
+    ],
     art: { kind: 'vest', body: '#4B4D5C' },
-    photoViews: [0, 4],
     abbr: [
       ['ch', 'chain'], ['sc', 'single crochet'], ['hdc', 'half double crochet'], ['dc', 'double crochet'],
       ['hdc3', 'hdc worked in the 3rd loop (the horizontal bar just below the top V, on the side facing away from you)'],
